@@ -5,9 +5,7 @@ plugins {
 
 android {
     namespace = "com.lessons.studentsapp"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.lessons.studentsapp"

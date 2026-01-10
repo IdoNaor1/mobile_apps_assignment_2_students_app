@@ -11,11 +11,11 @@ class Model private constructor() {
 
     fun initializeSampleData(defaultAvatarId: Int) {
         if (students.isEmpty()) {
-            students.add(Student("123456", "John Doe", false, defaultAvatarId))
-            students.add(Student("234567", "Jane Smith", true, defaultAvatarId))
-            students.add(Student("345678", "Bob Johnson", false, defaultAvatarId))
-            students.add(Student("456789", "Alice Williams", true, defaultAvatarId))
-            students.add(Student("567890", "Charlie Brown", false, defaultAvatarId))
+            students.add(Student("123456", "John Doe", phone = "0501111111", address = "addres1", isChecked = false, avatarResourceId = defaultAvatarId))
+            students.add(Student("234567", "Jane Smith", phone = "0502222222" , address = "addres2", isChecked = false, avatarResourceId = defaultAvatarId))
+            students.add(Student("345678", "Bob Johnson", phone = "0503333333", address = "addres3", isChecked = false, avatarResourceId = defaultAvatarId))
+            students.add(Student("456789", "Alice Williams", phone = "0504444444", address = "addres4", isChecked = false, avatarResourceId = defaultAvatarId))
+            students.add(Student("567890", "Charlie Brown", phone = "0505555555", address = "addres5", isChecked = false, avatarResourceId = defaultAvatarId))
         }
     }
 
@@ -62,10 +62,10 @@ class Model private constructor() {
         return students.removeIf { it.id == id }
     }
 
-    fun togglePresence(id: String): Boolean {
+    fun toggleChecked(id: String): Boolean {
         val index = students.indexOfFirst { it.id == id }
         if (index != -1) {
-            students[index] = students[index].withToggledPresence()
+            students[index] = students[index].withToggledChecked()
             return true
         }
         return false

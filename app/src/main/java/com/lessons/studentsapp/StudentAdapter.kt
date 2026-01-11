@@ -52,4 +52,9 @@ class StudentAdapter(
 
     }
 
+    fun submitList(newStudents: List<Student>) {
+        students = newStudents
+    }
+
+
 }

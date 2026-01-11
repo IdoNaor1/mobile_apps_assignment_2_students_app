@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
             students = Model.shared.getAllStudents(),
             onCheckedChanged = { studentId, position ->
                 Model.shared.toggleChecked(studentId)
+                adapter.submitList(Model.shared.getAllStudents())
                 adapter.notifyItemChanged(position)
             }
         )

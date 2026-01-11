@@ -6,4 +6,5 @@
     </style>
 
     <style name="Theme.StudentsApp" parent="Base.Theme.StudentsApp" />
+    <item name="colorPrimary">@color/input_line_color</item>
 </resources>

@@ -33,6 +33,7 @@ class AddStudentActivity : AppCompatActivity() {
         val saveBtn = findViewById<Button>(R.id.add_student_save)
 
         cancelBtn.setOnClickListener {
+            setResult(RESULT_CANCELED)
             finish()
         }
 
@@ -43,6 +44,11 @@ class AddStudentActivity : AppCompatActivity() {
             val phone = phoneEt.text.toString().trim()
             val address = addressEt.text.toString().trim()
             val isChecked = checkedCb.isChecked
+
+            if (name.isBlank() || id.isBlank()) {
+                Toast.makeText(this, "Name and ID are required", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             val student = Student(
                 id = id,
@@ -55,6 +61,7 @@ class AddStudentActivity : AppCompatActivity() {
 
             try {
                 Model.shared.addStudent(student)
+                setResult(RESULT_OK)
                 finish()
             } catch (e: IllegalArgumentException) {
                 Toast.makeText(this, e.message ?: "Error", Toast.LENGTH_SHORT).show()

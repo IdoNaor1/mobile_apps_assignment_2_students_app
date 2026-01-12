@@ -65,6 +65,13 @@ class MainActivity : AppCompatActivity() {
                 Model.shared.toggleChecked(studentId)
                 adapter.submitList(Model.shared.getAllStudents())
                 adapter.notifyItemChanged(position)
+            },
+            onStudentClicked = { studentId ->
+                // TODO (partner): open StudentDetailsActivity and pass studentId
+                // Example:
+                // val intent = Intent(this, StudentDetailsActivity::class.java)
+                // intent.putExtra(Constants.EXTRA_STUDENT_ID, studentId)
+                // startActivity(intent)
             }
         )
 

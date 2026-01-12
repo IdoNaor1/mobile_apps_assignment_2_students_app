@@ -47,8 +47,6 @@ class StudentAdapter(
         }
     }
 
-//    var listener: OnItemClickListener? = null
-
     override fun getItemCount(): Int = students.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentViewHolder {

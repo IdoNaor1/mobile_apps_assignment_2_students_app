@@ -11,8 +11,18 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.lessons.studentsapp.models.Model
 import com.lessons.studentsapp.models.Student
+import com.lessons.studentsapp.utils.Constants
 
 class AddStudentActivity : AppCompatActivity() {
+
+    private lateinit var nameEt: EditText
+    private lateinit var idEt: EditText
+    private lateinit var phoneEt: EditText
+    private lateinit var addressEt: EditText
+    private lateinit var checkedCb: CheckBox
+    private lateinit var cancelBtn: Button
+    private lateinit var saveBtn: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -23,52 +33,59 @@ class AddStudentActivity : AppCompatActivity() {
             insets
         }
 
-        val nameEt = findViewById<EditText>(R.id.add_student_name)
-        val idEt = findViewById<EditText>(R.id.add_student_id)
-        val phoneEt = findViewById<EditText>(R.id.add_student_phone)
-        val addressEt = findViewById<EditText>(R.id.add_student_address)
-        val checkedCb = findViewById<CheckBox>(R.id.add_student_checked)
+        bindViews()
+        setupClicks()
 
-        val cancelBtn = findViewById<Button>(R.id.add_student_cancel)
-        val saveBtn = findViewById<Button>(R.id.add_student_save)
+    }
 
+    private fun bindViews() {
+        nameEt = findViewById(R.id.add_student_name)
+        idEt = findViewById(R.id.add_student_id)
+        phoneEt = findViewById(R.id.add_student_phone)
+        addressEt = findViewById(R.id.add_student_address)
+        checkedCb = findViewById(R.id.add_student_checked)
+
+        cancelBtn = findViewById(R.id.add_student_cancel)
+        saveBtn = findViewById(R.id.add_student_save)
+    }
+
+    private fun setupClicks() {
         cancelBtn.setOnClickListener {
             setResult(RESULT_CANCELED)
             finish()
         }
+        saveBtn.setOnClickListener { saveStudent() }
+    }
 
-        saveBtn.setOnClickListener {
+    private fun saveStudent() {
+        val name = nameEt.text.toString().trim()
+        val id = idEt.text.toString().trim()
+        val phone = phoneEt.text.toString().trim()
+        val address = addressEt.text.toString().trim()
+        val isChecked = checkedCb.isChecked
 
-            val name = nameEt.text.toString().trim()
-            val id = idEt.text.toString().trim()
-            val phone = phoneEt.text.toString().trim()
-            val address = addressEt.text.toString().trim()
-            val isChecked = checkedCb.isChecked
-
-            if (name.isBlank() || id.isBlank()) {
-                Toast.makeText(this, "Name and ID are required", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            val student = Student(
-                id = id,
-                name = name,
-                phone = phone,
-                address = address,
-                isChecked = isChecked,
-                avatarResourceId = R.drawable.student_avatar
-            )
-
-            try {
-                Model.shared.addStudent(student)
-                setResult(RESULT_OK)
-                finish()
-            } catch (e: IllegalArgumentException) {
-                Toast.makeText(this, e.message ?: "Error", Toast.LENGTH_SHORT).show()
-            }
+        if (name.isBlank() || id.isBlank()) {
+            Toast.makeText(this, "Name and ID are required", Toast.LENGTH_SHORT).show()
+            return
         }
 
+        val student = Student(
+            id = id,
+            name = name,
+            phone = phone,
+            address = address,
+            isChecked = isChecked,
+            avatarResourceId = Constants.DEFAULT_AVATAR_RES_ID
+        )
 
-
+        try {
+            Model.shared.addStudent(student)
+            setResult(RESULT_OK)
+            finish()
+        } catch (e: IllegalArgumentException) {
+            Toast.makeText(this, e.message ?: "Error", Toast.LENGTH_SHORT).show()
+        }
     }
+
+
 }

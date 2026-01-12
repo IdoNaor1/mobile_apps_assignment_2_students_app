@@ -11,14 +11,40 @@ import com.lessons.studentsapp.models.Student
 
 class StudentAdapter(
     private var students: List<Student>,
-    private val onCheckedChanged: (studentId: String, position: Int) -> Unit) :
-    RecyclerView.Adapter<StudentAdapter.StudentViewHolder>() {
+    private val onCheckedChanged: (studentId: String, position: Int) -> Unit,
+    private val onStudentClicked: ((studentId: String) -> Unit)? = null
+) : RecyclerView.Adapter<StudentAdapter.StudentViewHolder>() {
 
-    class StudentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val avatar: ImageView = itemView.findViewById(R.id.student_row_avatar)
-        val name: TextView = itemView.findViewById(R.id.student_row_name)
-        val id: TextView = itemView.findViewById(R.id.student_row_id)
-        val checkbox: CheckBox = itemView.findViewById(R.id.student_row_checkbox)
+    class StudentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val avatar: ImageView = itemView.findViewById(R.id.student_row_avatar)
+        private val name: TextView = itemView.findViewById(R.id.student_row_name)
+        private val id: TextView = itemView.findViewById(R.id.student_row_id)
+        private val checkbox: CheckBox = itemView.findViewById(R.id.student_row_checkbox)
+
+        fun bind(
+            student: Student,
+            onCheckedChanged: (studentId: String, position: Int) -> Unit,
+            onStudentClicked: ((studentId: String) -> Unit)?
+        ) {
+            name.text = student.name
+            id.text = itemView.context.getString(R.string.student_id_label, student.id)
+            avatar.setImageResource(student.avatarResourceId)
+
+            // prevent recycled listeners from firing
+            checkbox.setOnCheckedChangeListener(null)
+            checkbox.isChecked = student.isChecked
+
+            checkbox.setOnCheckedChangeListener { _, _ ->
+                val pos = bindingAdapterPosition
+                if (pos != RecyclerView.NO_POSITION) {
+                    onCheckedChanged(student.id, pos)
+                }
+            }
+
+            itemView.setOnClickListener {
+                onStudentClicked?.invoke(student.id)
+            }
+        }
     }
 
 //    var listener: OnItemClickListener? = null
@@ -32,24 +58,7 @@ class StudentAdapter(
     }
 
     override fun onBindViewHolder(holder: StudentViewHolder, position: Int) {
-        val student = students[position]
-
-        holder.name.text = student.name
-        holder.id.text = holder.itemView.context.getString(
-            R.string.student_id_label,
-            student.id
-        )
-        holder.avatar.setImageResource(student.avatarResourceId)
-
-        holder.checkbox.setOnCheckedChangeListener(null)
-        holder.checkbox.isChecked = student.isChecked
-        holder.checkbox.setOnCheckedChangeListener {_, _ ->
-            val pos = holder.bindingAdapterPosition
-            if (pos != RecyclerView.NO_POSITION) {
-                onCheckedChanged(student.id, pos)
-            }
-        }
-
+        holder.bind(students[position], onCheckedChanged, onStudentClicked)
     }
 
     fun submitList(newStudents: List<Student>) {

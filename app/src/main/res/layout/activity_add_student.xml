@@ -13,6 +13,7 @@
         android:id="@+id/add_student_avatar"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:contentDescription="@string/student_avatar_description"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/student_avatar" />
 
@@ -28,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:text="name"
+            android:text="@string/label_name"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="20sp" />
 
@@ -37,6 +38,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:autofillHints="name"
             android:ems="10"
             android:inputType="text|textPersonName|textCapWords" />
     </LinearLayout>
@@ -52,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:text="id"
+            android:text="@string/label_id"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="20sp" />
 
@@ -61,7 +63,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:autofillHints=""
             android:ems="10"
+            android:importantForAutofill="no"
             android:inputType="number" />
     </LinearLayout>
 
@@ -76,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:text="phone"
+            android:text="@string/label_phone"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="20sp" />
 
@@ -85,6 +89,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:autofillHints="phone"
             android:ems="10"
             android:inputType="phone" />
     </LinearLayout>
@@ -100,7 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:text="address"
+            android:text="@string/label_address"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="20sp" />
 
@@ -109,6 +114,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:autofillHints="postalAddress"
             android:ems="10"
             android:inputType="text|textPostalAddress" />
     </LinearLayout>
@@ -118,7 +124,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="checked"
+        android:text="@string/label_checked"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="20sp" />
 
@@ -137,14 +143,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="CANCEL" />
+            android:text="@string/button_cancel" />
 
         <Button
             android:id="@+id/add_student_save"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="SAVE" />
+            android:text="@string/button_save" />
     </LinearLayout>
 
 </LinearLayout>

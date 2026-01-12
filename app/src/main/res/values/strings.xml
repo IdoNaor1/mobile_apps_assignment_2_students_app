@@ -2,4 +2,5 @@
     <string name="app_name">Students App</string>
     <string name="add_student_fab_description">Add New Student</string>
     <string name="student_avatar_description">Student Avatar</string>
+    <string name="student_id_label">ID: %1$s</string>
 </resources>

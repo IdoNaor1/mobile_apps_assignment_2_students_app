@@ -21,6 +21,9 @@ class StudentDetailsActivity : AppCompatActivity() {
     private lateinit var checkedTv: TextView
     private lateinit var editBtn: Button
 
+    private lateinit var backBtn: Button
+
+
     private var studentId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,6 +55,7 @@ class StudentDetailsActivity : AppCompatActivity() {
         addressTv = findViewById(R.id.student_details_address)
         checkedTv = findViewById(R.id.student_details_checked)
         editBtn = findViewById(R.id.student_details_edit)
+        backBtn = findViewById(R.id.student_details_back)
     }
 
     private fun setupClicks() {
@@ -59,6 +63,10 @@ class StudentDetailsActivity : AppCompatActivity() {
             val intent = Intent(this, EditStudentActivity::class.java)
             intent.putExtra(Constants.EXTRA_STUDENT_ID, studentId)
             startActivity(intent)
+        }
+
+        backBtn.setOnClickListener {
+            finish()
         }
     }
 

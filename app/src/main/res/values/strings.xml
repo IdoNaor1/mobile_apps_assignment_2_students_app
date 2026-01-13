@@ -16,4 +16,5 @@
     <string name="button_save">SAVE</string>
     <string name="button_cancel">CANCEL</string>
     <string name="button_delete">DELETE</string>
+    <string name="button_back">BACK</string>
 </resources>

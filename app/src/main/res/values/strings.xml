@@ -3,4 +3,17 @@
     <string name="add_student_fab_description">Add New Student</string>
     <string name="student_avatar_description">Student Avatar</string>
     <string name="student_id_label">ID: %1$s</string>
+
+    <!-- Field Labels -->
+    <string name="label_name">name</string>
+    <string name="label_id">id</string>
+    <string name="label_phone">phone</string>
+    <string name="label_address">address</string>
+    <string name="label_checked">checked</string>
+
+    <!-- Buttons -->
+    <string name="button_edit">EDIT</string>
+    <string name="button_save">SAVE</string>
+    <string name="button_cancel">CANCEL</string>
+    <string name="button_delete">DELETE</string>
 </resources>

@@ -46,6 +46,10 @@ class MainActivity : AppCompatActivity() {
 
         if (newSize > lastSize) {
             adapter.notifyItemInserted(newSize - 1)
+        } else if (newSize < lastSize) {
+            adapter.notifyDataSetChanged() // Student was deleted
+        } else {
+            adapter.notifyDataSetChanged() // Student might have been edited
         }
 
         lastSize = newSize
@@ -67,14 +71,11 @@ class MainActivity : AppCompatActivity() {
                 adapter.notifyItemChanged(position)
             },
             onStudentClicked = { studentId ->
-                // TODO (partner): open StudentDetailsActivity and pass studentId
-                // Example:
-                // val intent = Intent(this, StudentDetailsActivity::class.java)
-                // intent.putExtra(Constants.EXTRA_STUDENT_ID, studentId)
-                // startActivity(intent)
+                val intent = Intent(this, StudentDetailsActivity::class.java)
+                intent.putExtra(Constants.EXTRA_STUDENT_ID, studentId)
+                startActivity(intent)
             }
         )
-
         recyclerView.adapter = adapter
     }
 
